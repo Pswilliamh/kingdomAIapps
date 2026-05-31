@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "AppEstate": {
+      "title": "AppEstate",
+      "description": "A representation of a sovereign App-Estate deployment.",
+      "type": "object",
+      "properties": {
+        "ownerEmail": {
+          "type": "string",
+          "description": "Unique email of the estate security owner."
+        },
+        "sovereignDomain": {
+          "type": "string",
+          "description": "Cryptographic nameplate domain registered with .kingdom extension."
+        },
+        "appAssistantName": {
+          "type": "string",
+          "description": "Custom name of the dedicated AI core assistant."
+        },
+        "creditEnergyBalance": {
+          "type": "number",
+          "description": "Sovereign prompt token fuel balance."
+        },
+        "deploymentStatus": {
+          "type": "string",
+          "enum": ["provisioning", "active"],
+          "description": "Active deployment status states."
+        }
+      },
+      "required": ["ownerEmail", "sovereignDomain", "appAssistantName", "creditEnergyBalance", "deploymentStatus"]
+    }
+  },
+  "firestore": {
+    "/app_estates/{estateId}": {
+      "schema": "AppEstate",
+      "description": "Collection hosting isolated sovereign digital estates."
+    }
+  }
+}

@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reuseable global authentication and validation helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getUserEmail() {
+      return request.auth.token.email;
+    }
+
+    function isEmailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // 2. Validation Blueprint for AppEstate Entity
+    function isValidAppEstate(data) {
+      return data.keys().hasAll(['ownerEmail', 'sovereignDomain', 'appAssistantName', 'creditEnergyBalance', 'deploymentStatus'])
+        && data.keys().size() == 5
+        && data.ownerEmail is string
+        && data.ownerEmail.size() <= 256
+        && data.sovereignDomain is string
+        && data.sovereignDomain.size() <= 128
+        && data.sovereignDomain.matches('^[a-z0-9-]+\\.kingdom$')
+        && data.appAssistantName is string
+        && data.appAssistantName.size() <= 128
+        && data.creditEnergyBalance is number
+        && data.creditEnergyBalance >= 0
+        && (data.deploymentStatus == 'provisioning' || data.deploymentStatus == 'active');
+    }
+
+    // match block for app_estates collection
+    match /app_estates/{estateId} {
+      allow get: if isSignedIn() && (existing().ownerEmail == getUserEmail());
+      allow list: if isSignedIn() && resource.data.ownerEmail == getUserEmail();
+      
+      allow create: if isSignedIn() 
+        && isEmailVerified()
+        && isValidId(estateId) 
+        && isValidAppEstate(incoming())
+        && incoming().ownerEmail == getUserEmail()
+        && incoming().creditEnergyBalance == 5000
+        && incoming().deploymentStatus == 'provisioning';
+
+      allow update: if isSignedIn()
+        && isEmailVerified()
+        && isValidId(estateId)
+        && isValidAppEstate(incoming())
+        && incoming().ownerEmail == existing().ownerEmail
+        && incoming().ownerEmail == getUserEmail()
+        && incoming().sovereignDomain == existing().sovereignDomain
+        && (
+          // Action 1: Status progression from provisioning to active
+          (incoming().deploymentStatus != existing().deploymentStatus && incoming().diff(existing()).affectedKeys().hasOnly(['deploymentStatus'])) ||
+          // Action 2: Energy fuel balance top up or prompts consumption
+          (incoming().creditEnergyBalance != existing().creditEnergyBalance && incoming().diff(existing()).affectedKeys().hasOnly(['creditEnergyBalance'])) ||
+          // Action 3: Renaming key configurations
+          (incoming().appAssistantName != existing().appAssistantName && incoming().diff(existing()).affectedKeys().hasOnly(['appAssistantName']))
+        );
+
+      allow delete: if isSignedIn()
+        && isEmailVerified()
+        && existing().ownerEmail == getUserEmail();
+    }
+  }
+}

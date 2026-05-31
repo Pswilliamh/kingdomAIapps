@@ -1,0 +1,6 @@
+{
+  "name": "Kingdom",
+  "description": "A responsive, dark-mode landing page and creator dashboard style layout for Kingdom.ai.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

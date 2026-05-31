@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html, body {
+  background-color: #030712;
+  color: #f8fafc;
+  font-family: var(--font-sans);
+}
+
+/* Layered canvas stacking for physical grid visual elements */
+.workspace-canvas {
+  background-color: #030712;
+  background-image: 
+    radial-gradient(circle at 50% 50%, #0f122e 0%, #030712 100%),
+    url('/assets/starfield-bg.jpg'); 
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.global-territory-grid {
+  opacity: 0.25; /* Layer 1: The translucent global map and pulsing nodes */
+  mix-blend-mode: screen; /* Allows the background stars to shine right through the map */
+}
+
+.visionary-text-layer {
+  position: relative; /* Layer 2: Your crisp, high-contrast text commanding the forefront */
+  z-index: 10; 
+}
+
+/* Highly distinct, translucent 3-D dark steel-navy card depth and subtle ambient glow */
+.steel-navy-card {
+  background-color: rgba(10, 15, 30, 0.85) !important;
+  border: 1px solid rgba(99, 102, 241, 0.25) !important;
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.85), 
+    0 0 20px rgba(99, 102, 241, 0.15), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.steel-navy-card:hover {
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.95), 
+    0 0 30px rgba(99, 102, 241, 0.25), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+/* FirstPromoter-inspired premium sticky stack mechanics */
+.sticky-stack-container {
+  position: relative;
+  width: 100%;
+}
+
+.sticky-stack-layer {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  box-shadow: 0 -40px 80px -10px rgba(0, 0, 0, 0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+/* Subtle gold/indigo border glow for key stacked layers */
+.stack-layer-glow-violet {
+  border-top: 1px solid rgba(139, 92, 246, 0.2) !important;
+  background: linear-gradient(to bottom, rgba(6, 8, 22, 0.99), rgba(3, 7, 18, 1)) !important;
+}
+
+.stack-layer-glow-indigo {
+  border-top: 1px solid rgba(99, 102, 241, 0.25) !important;
+  background: linear-gradient(to bottom, rgba(8, 11, 28, 0.99), rgba(3, 7, 18, 1)) !important;
+}
+
+.stack-layer-glow-amber {
+  border-top: 1px solid rgba(245, 158, 11, 0.2) !important;
+  background: linear-gradient(to bottom, rgba(12, 8, 4, 0.99), rgba(3, 7, 18, 1)) !important;
+}
+
