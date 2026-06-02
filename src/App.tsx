@@ -198,6 +198,7 @@ export default function App() {
     }
   }, [currentPath]);
   const [devSimulationMode, setDevSimulationMode] = useState(true); // Default to true for easy validation and testing
+  const [isCleanFlow, setIsCleanFlow] = useState(false);
   const [firestoreWriteStatus, setFirestoreWriteStatus] = useState<string>('');
 
   // Auto-detect testing admin identity from typed email address
@@ -2534,16 +2535,16 @@ export default function App() {
                 </div>
 
                 {/* ADMIN DOMAIN LAYOUT OVERRIDE SELECTOR */}
-                <div className="p-5 bg-slate-950/80 rounded-2xl border border-white/5 space-y-4 text-left">
+                <div className="p-5 bg-slate-950/80 rounded-2xl border-2 border-violet-500/40 space-y-4 text-left shadow-xl shadow-indigo-500/5">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div className="space-y-1">
                       <span className="text-xs font-bold text-white font-sans flex items-center gap-1.5">
                         <Sliders className="w-4 h-4 text-indigo-400" />
-                        Global Domain Layout Switcher (4 Upcoming Channels)
+                        Global Domain Layout Switcher (Real-time Estate Overrides)
                       </span>
                       <p className="text-[11px] text-slate-400 font-sans leading-normal">
                         Current detected browser hostname: <span className="font-mono text-indigo-400 font-bold bg-indigo-500/10 px-1.5 py-0.5 rounded">{currentHost || 'localhost'}</span> &bull; 
-                        Active Layout: <span className="font-mono text-emerald-400 font-bold uppercase">{activeLayout}</span>
+                        Active Layout: <span className="font-mono text-emerald-400 font-bold uppercase">{activeLayout}</span> {isCleanFlow && <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-mono px-1 py-0.2 rounded ml-1">CLEAN FLOW</span>}
                       </p>
                     </div>
 
@@ -2553,13 +2554,13 @@ export default function App() {
                         onChange={(e) => {
                           const val = e.target.value;
                           setOverrideLayout(val === 'default' ? null : (val as any));
+                          setIsCleanFlow(val === 'maestro');
                         }}
-                        className="w-full sm:w-64 bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 font-sans focus:outline-none focus:border-violet-500/80 cursor-pointer"
+                        className="w-full sm:w-80 bg-slate-900 border-2 border-amber-400 text-amber-300 font-mono rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-amber-300 focus:ring-2 focus:ring-amber-500/40 cursor-pointer shadow-lg shadow-amber-500/10 transition-all hover:bg-slate-950 font-bold"
                       >
-                        <option value="default">Domain Default (kingdomaiapps.com)</option>
-                        <option value="symphony">Symphony AI Voice Hub (symphoniaiapps.com)</option>
-                        <option value="maestro">Hercules Spacious Layout (maestroaiapps.com)</option>
-                        <option value="tokenization">Secure Ledger Tracking (tokenizationaiapps.com)</option>
+                        <option value="default">kingdomaiapps.com (Cinematic Layout)</option>
+                        <option value="maestro">maestroaiapps.com (Hercules Clean Layout)</option>
+                        <option value="symphony">symphoniaiapps.com (Voice Assistant Layout)</option>
                       </select>
                     </div>
                   </div>
