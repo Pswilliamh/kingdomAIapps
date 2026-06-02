@@ -97,6 +97,14 @@ export default function App() {
     }
   });
 
+  const [currentPath] = useState(() => {
+    try {
+      return window.location.pathname || '/';
+    } catch {
+      return '/';
+    }
+  });
+
   const [overrideLayout, setOverrideLayoutState] = useState<'symphony' | 'maestro' | 'tokenization' | 'default' | null>(() => {
     try {
       const saved = localStorage.getItem('kingdom_layout_override');
@@ -174,12 +182,21 @@ export default function App() {
   const ADMIN_EMAIL_IDENTITY = 'pswilliamh@gmail.com';
   const [isAdmin, setIsAdmin] = useState(() => {
     try {
+      if (window.location.pathname === '/03master-06control-09panel') {
+        return true;
+      }
       const cached = localStorage.getItem('kingdom_admin_mode');
       return cached === 'true';
     } catch {
       return false;
     }
   });
+
+  useEffect(() => {
+    if (currentPath === '/03master-06control-09panel') {
+      setIsAdmin(true);
+    }
+  }, [currentPath]);
   const [devSimulationMode, setDevSimulationMode] = useState(true); // Default to true for easy validation and testing
   const [firestoreWriteStatus, setFirestoreWriteStatus] = useState<string>('');
 
@@ -685,10 +702,10 @@ export default function App() {
             {view === 'landing' ? (
               <button
                 onClick={() => setView('dashboard')}
-                className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white border border-white/10 hover:border-white/20 rounded-lg transition-all duration-200 bg-slate-900/40 backdrop-blur-md hover:bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-violet-500/50 flex items-center space-x-1.5"
+                className="px-4.5 py-2 text-xs font-semibold text-white tracking-wide uppercase border border-violet-500/40 hover:border-violet-450 rounded-xl transition-all duration-200 bg-gradient-to-r from-violet-600/80 to-indigo-600/80 hover:from-violet-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 flex items-center space-x-2 shadow-lg shadow-violet-500/10 cursor-pointer"
               >
-                <LayoutDashboard className="w-4 h-4 text-violet-400" />
-                <span>Sovereign Hub Login</span>
+                <LayoutDashboard className="w-4 h-4 text-violet-200 animate-pulse" />
+                <span>Sovereign Hub</span>
               </button>
             ) : (
               <button
@@ -700,7 +717,7 @@ export default function App() {
               >
                 <LogOut className="w-4 h-4" />
                 <span>Simulate Logout</span>
-              </button>
+               </button>
             )}
           </div>
         </div>
@@ -1107,38 +1124,40 @@ export default function App() {
                 </div>
                 
                 <div className="flex flex-wrap items-center gap-3">
-                  {/* MASTER ADMIN BYPASS STATUS & SIMULATION SWITCH */}
-                  {isAdmin ? (
-                    <div className="flex items-center space-x-3 bg-violet-950/40 border border-violet-500/20 px-3.5 py-2 rounded-xl">
-                      <Sliders className="w-4 h-4 text-violet-400" />
-                      <span className="text-xs font-semibold text-violet-300">Developer Simulation Mode</span>
+                  {/* MASTER ADMIN BYPASS STATUS & SIMULATION SWITCH - Hidden on public route, visible on secret route */}
+                  {currentPath === '/03master-06control-09panel' && (
+                    isAdmin ? (
+                      <div className="flex items-center space-x-3 bg-violet-950/40 border border-violet-500/20 px-3.5 py-2 rounded-xl">
+                        <Sliders className="w-4 h-4 text-violet-400" />
+                        <span className="text-xs font-semibold text-violet-300">Developer Simulation Mode</span>
+                        <button
+                          type="button"
+                          onClick={() => setDevSimulationMode(!devSimulationMode)}
+                          className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                            devSimulationMode ? 'bg-indigo-500' : 'bg-slate-800'
+                          }`}
+                          aria-label="Developer Simulation Toggle"
+                        >
+                          <span
+                            className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
+                              devSimulationMode ? 'translate-x-5' : 'translate-x-0'
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    ) : (
                       <button
                         type="button"
-                        onClick={() => setDevSimulationMode(!devSimulationMode)}
-                        className={`relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                          devSimulationMode ? 'bg-indigo-500' : 'bg-slate-800'
-                        }`}
-                        aria-label="Developer Simulation Toggle"
+                        onClick={() => {
+                          setUserEmail('PsWilliamh@gmail.com');
+                          setIsAdmin(true);
+                          localStorage.setItem('kingdom_admin_mode', 'true');
+                        }}
+                        className="text-xs bg-slate-900 border border-indigo-500/35 text-indigo-300 hover:text-white px-3 py-2 rounded-xl transition-all font-mono hover:bg-indigo-950/30 font-semibold cursor-pointer"
                       >
-                        <span
-                          className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
-                            devSimulationMode ? 'translate-x-5' : 'translate-x-0'
-                          }`}
-                        />
+                        Unlock Admin Mode (PsWilliamh@gmail.com)
                       </button>
-                    </div>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setUserEmail('PsWilliamh@gmail.com');
-                        setIsAdmin(true);
-                        localStorage.setItem('kingdom_admin_mode', 'true');
-                      }}
-                      className="text-xs bg-slate-900 border border-indigo-500/35 text-indigo-300 hover:text-white px-3 py-2 rounded-xl transition-all font-mono hover:bg-indigo-950/30 font-semibold cursor-pointer"
-                    >
-                      Unlock Admin Mode (PsWilliamh@gmail.com)
-                    </button>
+                    )
                   )}
 
                   <div className="flex items-center space-x-2 text-xs text-slate-400 bg-slate-950/50 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 w-fit h-fit">
@@ -2471,115 +2490,117 @@ export default function App() {
 
             </div>
 
-            {/* ADMIN TESTING DASHBOARD PANEL */}
-            <div className="mt-8 bg-slate-900/60 backdrop-blur-xl border border-violet-500/20 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-violet-600/5 blur-3xl rounded-full" />
-              
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-white/5 pb-4 gap-3">
-                <div className="space-y-1">
-                  <div className="flex items-center space-x-2 text-[10px] text-violet-400 font-bold uppercase tracking-wider font-mono">
-                    <ShieldCheck className="w-4 h-4 text-violet-400 animate-pulse" />
-                    <span>Administrative Authority Controls</span>
-                  </div>
-                  <h3 className="text-lg font-black text-white">Metrics & Verification Panel</h3>
-                </div>
+                        {/* ADMIN TESTING DASHBOARD PANEL - Secured behind private unlisted URL path */}
+            {currentPath === '/03master-06control-09panel' && (
+              <div className="mt-8 bg-slate-900/60 backdrop-blur-xl border border-violet-500/20 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-violet-600/5 blur-3xl rounded-full" />
                 
-                <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-bold uppercase tracking-widest w-fit flex items-center gap-1.5 h-fit">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Sovereign Security Online</span>
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 bg-slate-950/60 rounded-2xl border border-white/5 flex items-center justify-between">
-                  <div className="space-y-0.5 text-left">
-                    <span className="text-xs text-slate-500 block font-semibold font-sans">Active Sandboxed Containers</span>
-                    <span className="text-xs font-bold text-slate-350 font-mono">Simulated Node VM Instances</span>
-                  </div>
-                  <div className="text-xl font-extrabold text-white font-mono bg-violet-500/15 border border-violet-500/30 px-3 py-1 rounded-xl">
-                    {nodes.length + 7} Containers
-                  </div>
-                </div>
-
-                <div className="p-4 bg-slate-950/60 rounded-2xl border border-white/5 flex items-center justify-between">
-                  <div className="space-y-0.5 text-left">
-                    <span className="text-xs text-slate-500 block font-semibold font-sans">Global Energy Escrow Status</span>
-                    <span className="text-xs font-bold text-slate-350 font-mono">Escrow Ledger Health</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl font-mono">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>Stable 200 OK</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* ADMIN DOMAIN LAYOUT OVERRIDE SELECTOR */}
-              <div className="p-5 bg-slate-950/80 rounded-2xl border border-white/5 space-y-4 text-left">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-white/5 pb-4 gap-3">
                   <div className="space-y-1">
-                    <span className="text-xs font-bold text-white font-sans flex items-center gap-1.5">
-                      <Sliders className="w-4 h-4 text-indigo-400" />
-                      Global Domain Layout Switcher (4 Upcoming Channels)
-                    </span>
-                    <p className="text-[11px] text-slate-400 font-sans leading-normal">
-                      Current detected browser hostname: <span className="font-mono text-indigo-400 font-bold bg-indigo-500/10 px-1.5 py-0.5 rounded">{currentHost || 'localhost'}</span> &bull; 
-                      Active Layout: <span className="font-mono text-emerald-400 font-bold uppercase">{activeLayout}</span>
-                    </p>
+                    <div className="flex items-center space-x-2 text-[10px] text-violet-400 font-bold uppercase tracking-wider font-mono">
+                      <ShieldCheck className="w-4 h-4 text-violet-400 animate-pulse" />
+                      <span>Administrative Authority Controls</span>
+                    </div>
+                    <h3 className="text-lg font-black text-white">Metrics & Verification Panel</h3>
+                  </div>
+                  
+                  <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-bold uppercase tracking-widest w-fit flex items-center gap-1.5 h-fit">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Sovereign Security Online</span>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 bg-slate-950/60 rounded-2xl border border-white/5 flex items-center justify-between">
+                    <div className="space-y-0.5 text-left">
+                      <span className="text-xs text-slate-500 block font-semibold font-sans">Active Sandboxed Containers</span>
+                      <span className="text-xs font-bold text-slate-350 font-mono">Simulated Node VM Instances</span>
+                    </div>
+                    <div className="text-xl font-extrabold text-white font-mono bg-violet-500/15 border border-violet-500/30 px-3 py-1 rounded-xl">
+                      {nodes.length + 7} Containers
+                    </div>
                   </div>
 
-                  <div className="w-full sm:w-auto">
-                    <select
-                      value={overrideLayout || 'default'}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setOverrideLayout(val === 'default' ? null : (val as any));
-                      }}
-                      className="w-full sm:w-64 bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 font-sans focus:outline-none focus:border-violet-500/80 cursor-pointer"
-                    >
-                      <option value="default">Domain Default (kingdomaiapps.com)</option>
-                      <option value="symphony">Symphony AI Voice Hub (symphoniaiapps.com)</option>
-                      <option value="maestro">Hercules Spacious Layout (maestroaiapps.com)</option>
-                      <option value="tokenization">Secure Ledger Tracking (tokenizationaiapps.com)</option>
-                    </select>
+                  <div className="p-4 bg-slate-950/60 rounded-2xl border border-white/5 flex items-center justify-between">
+                    <div className="space-y-0.5 text-left">
+                      <span className="text-xs text-slate-500 block font-semibold font-sans">Global Energy Escrow Status</span>
+                      <span className="text-xs font-bold text-slate-350 font-mono">Escrow Ledger Health</span>
+                    </div>
+                    <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl font-mono">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Stable 200 OK</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="pt-2 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-xs text-slate-500 font-normal leading-relaxed max-w-md text-left">
-                  This panel is rendered for administrative validation of digital app isolation properties, sandbox metrics, and mock database integration state.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    // Flush custom states back to default values
-                    setDomain('');
-                    setSearchResult(null);
-                    setSelectedTopUp(0);
-                    setHasPaidFee(false);
-                    setEstateName('My First Kingdom');
-                    setInitialNodeName('Aegis-I');
-                    setUserEmail('');
-                    setNodes([
-                      {
-                        id: 'node-1',
-                        name: 'Aegis-I',
-                        model: 'Sovereign Llama 3',
-                        status: 'active',
-                        creditsConsumed: 240,
-                        created: '2026-05-26 11:30'
-                      }
-                    ]);
-                    setCheckoutStep(0);
-                    setFirestoreWriteStatus('');
-                    alert('Draft real-estate collections flushed successfully. All developer configurations have been returned to seed states.');
-                  }}
-                  className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 rounded-xl shadow-lg shadow-red-500/10 transition-all cursor-pointer text-center font-sans tracking-wider uppercase"
-                >
-                  Flush Test Real Estate Collections
-                </button>
+                {/* ADMIN DOMAIN LAYOUT OVERRIDE SELECTOR */}
+                <div className="p-5 bg-slate-950/80 rounded-2xl border border-white/5 space-y-4 text-left">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div className="space-y-1">
+                      <span className="text-xs font-bold text-white font-sans flex items-center gap-1.5">
+                        <Sliders className="w-4 h-4 text-indigo-400" />
+                        Global Domain Layout Switcher (4 Upcoming Channels)
+                      </span>
+                      <p className="text-[11px] text-slate-400 font-sans leading-normal">
+                        Current detected browser hostname: <span className="font-mono text-indigo-400 font-bold bg-indigo-500/10 px-1.5 py-0.5 rounded">{currentHost || 'localhost'}</span> &bull; 
+                        Active Layout: <span className="font-mono text-emerald-400 font-bold uppercase">{activeLayout}</span>
+                      </p>
+                    </div>
+
+                    <div className="w-full sm:w-auto">
+                      <select
+                        value={overrideLayout || 'default'}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setOverrideLayout(val === 'default' ? null : (val as any));
+                        }}
+                        className="w-full sm:w-64 bg-slate-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 font-sans focus:outline-none focus:border-violet-500/80 cursor-pointer"
+                      >
+                        <option value="default">Domain Default (kingdomaiapps.com)</option>
+                        <option value="symphony">Symphony AI Voice Hub (symphoniaiapps.com)</option>
+                        <option value="maestro">Hercules Spacious Layout (maestroaiapps.com)</option>
+                        <option value="tokenization">Secure Ledger Tracking (tokenizationaiapps.com)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <p className="text-xs text-slate-500 font-normal leading-relaxed max-w-md text-left">
+                    This panel is rendered for administrative validation of digital app isolation properties, sandbox metrics, and mock database integration state.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Flush custom states back to default values
+                      setDomain('');
+                      setSearchResult(null);
+                      setSelectedTopUp(0);
+                      setHasPaidFee(false);
+                      setEstateName('My First Kingdom');
+                      setInitialNodeName('Aegis-I');
+                      setUserEmail('');
+                      setNodes([
+                        {
+                          id: 'node-1',
+                          name: 'Aegis-I',
+                          model: 'Sovereign Llama 3',
+                          status: 'active',
+                          creditsConsumed: 240,
+                          created: '2026-05-26 11:30'
+                        }
+                      ]);
+                      setCheckoutStep(0);
+                      setFirestoreWriteStatus('');
+                      alert('Draft real-estate collections flushed successfully. All developer configurations have been returned to seed states.');
+                    }}
+                    className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 rounded-xl shadow-lg shadow-red-500/10 transition-all cursor-pointer text-center font-sans tracking-wider uppercase"
+                  >
+                    Flush Test Real Estate Collections
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
         )}
 
