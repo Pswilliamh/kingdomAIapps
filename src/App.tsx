@@ -58,9 +58,9 @@ interface GatewayEngine {
 const gatewayMatrix: GatewayEngine[] = [
   {
     id: 'symphony',
-    title: 'Symphony',
-    hook: 'The Orchestrator keeping your digital webapp-estate in perfect tune with your vision.',
-    symphonyGreeting: 'Greetings. I am Symphony, the primary orchestration layer of your Kingdom.aiapps estate environment. I organize custom partitions, map subdomains, scale containers, and monitor cloud-isolate VMs. How can I help you fine-tune your webapp vision today?'
+    title: 'Symphony AI',
+    hook: 'The automated high-performance App Generator for creators.',
+    symphonyGreeting: 'Hello! I am Symphony AI, your automated, high-performance App Generator for creators. Tell me what type of application you would like to build today, and I will instantly lay out a beautiful, functional blueprint, layout pattern, or component prototype for you on the very first turn!'
   },
   {
     id: 'aegis',
@@ -267,21 +267,224 @@ export default function App() {
     setTimeout(() => {
       setIsSymphonyTyping(false);
       
-      let replyText = "I have recognized your command payload. All container partitions are operating normally inside the sandbox cluster.";
+      let replyText = "";
       const lower = userMsg.toLowerCase();
       
-      if (lower.includes('domain') || lower.includes('territory') || lower.includes('claim')) {
-        replyText = "DNS Routing Engine report: Subdomain mapping has successfully verified the territory registry. You can use any custom subdomain ending in .kingdomaiapps.com to host your isolated application microstructures seamlessly.";
+      if (lower.includes('podcast') || lower.includes('text-to-speech') || lower.includes('speech') || lower.includes('audio')) {
+        replyText = `### Symphony AI Audio Engine — Premium Podcast Generator Blueprint
+
+I have generated an instant layout pattern for your **VoiceCast (Text-to-Speech Podcast App)**:
+
+\`\`\`tsx
+import React, { useState } from 'react';
+import { Play, Pause, Disc, Volume2, Sparkles, Mic, FileText } from 'lucide-react';
+
+export default function VoiceCastApp() {
+  const [script, setScript] = useState("Welcome to today's episode. Today we dive deep into...");
+  const [voiceSelected, setVoiceSelected] = useState("Aura-Serene");
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <div className="max-w-4xl mx-auto bg-[#0a0f1d] text-white rounded-3xl p-6 border border-violet-500/10 shadow-2xl space-y-6">
+      <div className="flex items-center justify-between border-b border-white/5 pb-4">
+        <div className="flex items-center space-x-3">
+          <div className="p-2.5 bg-violet-600/20 rounded-xl border border-violet-500/20 text-violet-400">
+            <Mic className="w-5 h-5 animate-pulse" />
+          </div>
+          <div>
+            <h1 className="text-lg font-bold tracking-tight">VoiceCast Studio</h1>
+            <p className="text-xs text-slate-400">Interactive podcast and narration generator</p>
+          </div>
+        </div>
+        <span className="text-xs bg-slate-900 px-3 py-1 rounded-full border border-white/5 text-violet-300 flex items-center gap-1">
+          <Sparkles className="w-3.5 h-3.5" /> High Fidelity Mode
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Podcast Script Description</label>
+          <textarea
+            value={script}
+            onChange={(e) => setScript(e.target.value)}
+            className="w-full h-48 bg-slate-950 border border-white/10 rounded-2xl p-4 text-xs font-sans text-white focus:border-violet-500 outline-none leading-relaxed resize-none"
+          />
+        </div>
+
+        <div className="bg-slate-950/60 rounded-2xl border border-white/5 p-5 flex flex-col justify-between">
+          <div className="space-y-4">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Voice Persona Configuration</span>
+            <div className="grid grid-cols-2 gap-2">
+              {['Aura-Serene', 'Nova-Energetic', 'Sage-Narrator', 'Echo-Symmetric'].map(voice => (
+                <button
+                  key={voice}
+                  onClick={() => setVoiceSelected(voice)}
+                  className={\`p-3 rounded-xl border text-xs font-medium text-left transition-all \${
+                    voiceSelected === voice 
+                      ? 'bg-violet-600/25 border-violet-500 text-white' 
+                      : 'bg-slate-900/40 border-white/5 text-slate-400 hover:text-white'
+                  }\`}
+                >
+                  {voice}
+                </button>
+              ))}
+            </div>
+            
+            <div className="bg-slate-900/80 rounded-xl p-3 border border-white/5 flex items-center gap-3">
+              <Disc className={\`w-5 h-5 text-violet-400 \${isPlaying ? 'animate-spin' : ''}\`} />
+              <div className="flex-1 min-w-0">
+                <span className="text-xs font-semibold block text-slate-200">Current Compilation Wave</span>
+                <span className="text-[10px] text-slate-500 font-mono block truncate">44.1 kHz • Stereo • Float32</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="flex-1 bg-violet-600 hover:bg-violet-500 text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              <span>{isPlaying ? "Pause Stream" : "Synthesize Podcast"}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+\`\`\`
+
+*This layout has been fully optimized for creators. It provides clear script input, dynamic voice selector controls, and ambient state handling.*`;
+      } else if (lower.includes('dashboard') || lower.includes('analytics') || lower.includes('admin') || lower.includes('chart')) {
+        replyText = `### Symphony AI Analytics Layout — High-Performance Dashboard Pattern
+
+Here is an elegant dashboard blueprint generated instantly for your analytics dashboard:
+
+\`\`\`tsx
+import React from 'react';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { TrendingUp, Users, DollarSign, Zap } from 'lucide-react';
+
+const stats = [
+  { label: "Active Revenue", value: "$48,259", change: "+14.2%", icon: DollarSign, color: "text-emerald-400" },
+  { label: "Creative Users", value: "12,948", change: "+22.5%", icon: Users, color: "text-violet-400" },
+  { label: "Generation Tasks", value: "842,102", change: "+35.1%", icon: Zap, color: "text-amber-400" },
+];
+
+export default function AnalyticsDashboard() {
+  return (
+    <div className="bg-[#090d16] text-white p-6 rounded-3xl border border-white/5 shadow-2xl space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-bold tracking-tight">Analytics Command Hub</h2>
+          <p className="text-xs text-slate-400">Real-time performance metrics</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {stats.map((stat, i) => (
+          <div key={i} className="bg-slate-950/60 p-4 rounded-2xl border border-white/5 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-slate-400">{stat.label}</span>
+              <stat.icon className={\`w-4 h-4 \${stat.color}\`} />
+            </div>
+            <div className="flex items-end justify-between">
+              <span className="text-xl font-bold">{stat.value}</span>
+              <span className="text-xs text-emerald-400 flex items-center gap-0.5">
+                <TrendingUp className="w-3 h-3" /> {stat.change}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+\`\`\`
+
+*This blueprint features elegant, low-profile status card grids paired with a clean dark-canvas aesthetic that represents information in perfect, clean density.*`;
+      } else if (lower.includes('todo') || lower.includes('task') || lower.includes('list') || lower.includes('checklist')) {
+        replyText = `### Symphony AI Productivity Blueprint — High-Performance Task Manager Pattern
+
+Here is an elegant, minimal user interface boilerplate crafted instantly for task list applications:
+
+\`\`\`tsx
+import React, { useState } from 'react';
+import { Check, Trash2, Plus, Sparkles } from 'lucide-react';
+
+export default function AppTodoList() {
+  const [tasks, setTasks] = useState([
+    { id: 1, text: "Design high-fidelity custom interface layout", done: true },
+    { id: 2, text: "Refactor response handlers inside core engine", done: false },
+  ]);
+
+  return (
+    <div className="max-w-md mx-auto bg-slate-950 p-6 rounded-3xl border border-white/5 shadow-2xl space-y-4">
+      <h3 className="text-md font-bold tracking-tight text-white flex items-center gap-1.5">
+        <Sparkles className="w-4 h-4 text-violet-400" /> Task Planner
+      </h3>
+      
+      <div className="space-y-2">
+        {tasks.map(t => (
+          <div key={t.id} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+            <span className={\`text-xs \${t.done ? 'line-through text-slate-500' : 'text-slate-200'}\`}>
+              {t.text}
+            </span>
+            <button className="text-slate-400 hover:text-red-400 transition-colors">
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+\`\`\`
+
+*This checklist incorporates comfortable margins, subtle element borders, and high contrast typography tailored for peak focus.*`;
+      } else if (lower.includes('domain') || lower.includes('claim') || lower.includes('register') || lower.includes('subdomain')) {
+        replyText = "Hello! Symphony AI can assist you in generating custom front-end landing pages, portfolio structures, or application components. Your custom subdomains map seamlessly to your completed visual estate patterns instantly.";
       } else if (lower.includes('fuel') || lower.includes('credit') || lower.includes('power')) {
-        replyText = "Sovereign node fuel status: Fuel packs provide direct computational power (credits) to your A.I. modules. 100% of the preloaded value is allocated immediately underneath your private cryptographic ledger keys.";
+        replyText = "Symphony App Generator status: Generation credits provide direct computational power to your code build modules. These are allocated immediately to your profile so you can instantly design apps.";
       } else if (lower.includes('code') || lower.includes('ownership') || lower.includes('data')) {
-        replyText = "Legal and cryptographic deed status: You retain 100% absolute, non-revocable ownership over all generated data vectors and code files. Symphony keeps zero proprietary locks on your custom estate IP.";
+        replyText = "Intellectual property policy: You retain 100% absolute, non-revocable ownership over all generated data vectors and code files. Symphony keeps zero proprietary locks on your custom assets.";
       } else if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-        replyText = "Greetings, Pioneer! I am standing by. Let's claim your digital territory, fuel your intelligence nodes, and watch your applications live-compile directly to the global network map.";
-      } else if (lower.includes('vision') || lower.includes('soul') || lower.includes('build')) {
-        replyText = "As your Orchestrator, I translate raw philosophical commands into high-performance full-stack files. Tell me what type of application your estate needs, and I will assemble and configure it exactly to match.";
-      } else if (lower.includes('symphony')) {
-        replyText = "I am Symphony, the live Orchestrator. My primary duty is to keep your virtual sandbox containers, isolated Databases, and routing nodes running in flawless alignment with your sovereign commands.";
+        replyText = "Hello! I am Symphony AI, your automated, high-performance App Generator for creators. Tell me what type of application you would like to build today (e.g., a text-to-speech podcast app, a task planner, or a creative portfolio), and I will instantly assemble the blueprint and custom styling components for you on the very first turn!";
+      } else if (lower.includes('symphony') || lower.includes('who are you') || lower.includes('live orchestrator')) {
+        replyText = "You are speaking to Symphony AI, an automated, high-performance App Generator for creators. My role is to serve visiting users instantly and deliver finished layouts, interactive components, and clean React code directly to creators with zero technical complications.";
+      } else {
+        replyText = `### Symphony AI Custom Blueprint — Layout Pattern Generated Instantly
+
+I have assembled a beautiful visual component pattern based on your inquiry (**"${userMsg}"**):
+
+\`\`\`tsx
+import React from 'react';
+import { Sparkles, ArrowRight } from 'lucide-react';
+
+export default function GeneratedProductCard() {
+  return (
+    <div className="p-6 bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-violet-500/10 rounded-2xl shadow-xl flex flex-col justify-between space-y-4">
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] uppercase font-bold tracking-widest text-violet-400">AI Blueprint V1.0</span>
+        <Sparkles className="w-4 h-4 text-violet-400 animate-pulse" />
+      </div>
+      <div>
+        <h4 className="text-md font-bold text-white tracking-tight">Interactive Creative Module</h4>
+        <p className="text-xs text-slate-300 leading-relaxed mt-1">
+          A bespoke visual interface component assembled to fit your customized request. Highly modular, clean, and styled with high-contrast elements.
+        </p>
+      </div>
+      <button className="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors">
+        <span>Proceed with Build</span>
+        <ArrowRight className="w-3.5 h-3.5" />
+      </button>
+    </div>
+  );
+}
+\`\`\`
+
+*This layout has been successfully synthesized. It focuses on beautiful typography paired with comfortable padding and high-contrast color highlights to draw visual rhythm.*`;
       }
       
       setSymphonyMessages(prev => [...prev, { sender: 'symphony', text: replyText, timestamp: new Date() }]);
@@ -371,7 +574,7 @@ export default function App() {
   useEffect(() => {
     if (checkoutStep === 1) {
       setTypedCode('');
-      const fullText = `// Compiling src/components/symphony.tsx...\nimport React from "react";\nimport { motion } from "motion/react";\n\nexport const Symphony: React.FC = () => {\n  const cores = ["Orchestrator", "Kinetix", "Aegis"];\n  return (\n    <div className="p-4 bg-slate-900 border border-violet-500/20 rounded-xl">\n      <h3 className="font-mono text-xs text-violet-400">Symphony Engine Synced</h3>\n      <p className="text-[10px] text-slate-400 mt-1">Multi-agent nodes balanced.</p>\n    </div>\n  );\n};`;
+      const fullText = `// Building src/components/SymphonyApp.tsx...\nimport React from "react";\nimport { Sparkles } from "lucide-react";\n\nexport const SymphonyApp: React.FC = () => {\n  return (\n    <div className="p-6 bg-slate-950 border border-violet-500/10 rounded-2xl shadow-xl">\n      <h3 className="font-bold text-sm text-white">Symphony App Built!</h3>\n      <p className="text-xs text-slate-400 mt-1">Instant layout custom generated designed for creators.</p>\n    </div>\n  );\n};`;
       let currentIdx = 0;
       const t = setInterval(() => {
         if (currentIdx < fullText.length) {
@@ -3220,7 +3423,7 @@ export default function App() {
                     <h4 className="text-sm font-black text-white tracking-wider flex items-center gap-1.5 font-sans">
                       {activeEngine.title}
                       <span className="text-[9px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-widest">
-                        Orchestrator
+                        App Generator
                       </span>
                     </h4>
                     {/* The requested Symphony subtitle */}
@@ -3308,7 +3511,7 @@ export default function App() {
                   type="text"
                   value={symphonyInput}
                   onChange={(e) => setSymphonyInput(e.target.value)}
-                  placeholder="Speak your vision to the Orchestrator..."
+                  placeholder="Ask Symphony to generate an app (e.g. podcast app, to-do list)..."
                   className="flex-1 bg-slate-900/70 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-all font-sans"
                 />
                 <button

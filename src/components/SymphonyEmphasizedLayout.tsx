@@ -26,16 +26,16 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
   const [isPlayingWave, setIsPlayingWave] = useState(true);
   const [userPrompt, setUserPrompt] = useState('');
   const [consoleLogs, setConsoleLogs] = useState<string[]>([
-    "Symphony Voice Core V2.0 initialized (Aegis-Secure).",
-    "Ready for sound-wave intent mapping..."
+    "Symphony AI App Builder V2.0 initialized.",
+    "Ready to instantly generate layouts and blueprints..."
   ]);
   const [compilingStep, setCompilingStep] = useState<string>('idle'); // 'idle' | 'analyzing' | 'building' | 'deployed'
 
   const predefinedPrompts = [
-    "Compile client-side routing on port 3000",
-    "Provision secure isolated Firestore db schema",
-    "Scale multi-agent sandbox containers",
-    "Affix customized domain deed credentials"
+    "Generate text-to-speech podcast app",
+    "Create beautiful minimalist dashboard",
+    "Build active workout fitness tracker",
+    "Configure elegant photo editing portfolio"
   ];
 
   // Animated wave bars
@@ -59,17 +59,17 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
     setUserPrompt('');
     setConsoleLogs(prev => [
       ...prev,
-      `> Voice request: "${promptText}"`,
-      "[Symphony Voice Layer] Decoding signal amplitude...",
-      "[Symphony Voice Layer] Semantic match: Sovereign Sandbox Directive."
+      `> Generation Request: "${promptText}"`,
+      "[Symphony AI] Analyzing creative objectives and mapping UI pathways...",
+      "[Symphony AI] Match: Creative Component Pattern Request."
     ]);
     setCompilingStep('analyzing');
 
     setTimeout(() => {
       setConsoleLogs(prev => [
         ...prev,
-        "[Orchestrator Core] Building modular AST for sandboxed cloud container...",
-        "[Aegis Core] Provisioning isolated database partition: stable-us-central1-firestore-db"
+        "[Symphony AI] Crafting modular application layout and UI structures...",
+        "[Symphony AI] Syncing local states with high-performance reactive components..."
       ]);
       setCompilingStep('building');
     }, 1500);
@@ -77,8 +77,8 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
     setTimeout(() => {
       setConsoleLogs(prev => [
         ...prev,
-        "[Kinetix Core] Routing engine live on secure region gateway.",
-        "[Genesis Core] Domain compiled successfully: 200 OK."
+        "[Symphony AI] Enhancing typography pairing, spacing design, and visual styling...",
+        "[Symphony AI] Custom App components rendered successfully on first turn!"
       ]);
       setCompilingStep('deployed');
     }, 3500);
@@ -95,14 +95,14 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
         </div>
 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
-          Orchestrate with Sound.<br />
+          Generate App Layouts Instantly.<br />
           <span className="bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent font-sans">
-            Symphony AI Voice Agent Active.
+            Symphony Creator Agent Active.
           </span>
         </h1>
 
         <p className="text-base sm:text-lg md:text-xl text-slate-400 font-normal leading-relaxed max-w-2xl mx-auto">
-          Experience sound-driven compilation. Speak or type your app estate requirements, and observe the Symphony multi-agent node build and sync your isolated digital environment in real-time.
+          Experience instant voice-driven app generation. Speak or type your app requirements, and observe Symphony immediately build helpful layout patterns and gorgeous UI components.
         </p>
 
         {/* VOICE PULSE WIDGET */}
@@ -167,11 +167,11 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
           <div className="space-y-2 text-left">
             <div className="flex items-center space-x-2 text-violet-400 font-mono text-[10px] font-bold uppercase tracking-wider">
               <Cpu className="w-4 h-4" />
-              <span>Symphony Directives Console</span>
+              <span>Symphony App Generator</span>
             </div>
-            <h3 className="text-xl font-black text-white">Sovereign Direct Prompting</h3>
+            <h3 className="text-xl font-black text-white">Symphony App Prototyping</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Feed detailed commands directly into the terminal below. Preconfigured directive options can be triggered at any time.
+              Feed detailed creative requests directly into the generator below or run a prompt.
             </p>
           </div>
 
@@ -197,7 +197,7 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
             <div className="relative">
               <input
                 type="text"
-                placeholder="What sandbox application should Symphony build next?"
+                placeholder="What application would you like Symphony to build next?"
                 value={userPrompt}
                 onChange={(e) => setUserPrompt(e.target.value)}
                 onKeyDown={(e) => {
@@ -222,7 +222,7 @@ export const SymphonyEmphasizedLayout: React.FC<SymphonyEmphasizedLayoutProps> =
               <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-              <span className="text-[10px] text-slate-500 font-bold ml-2">symphony@compiler-telemetry:~</span>
+              <span className="text-[10px] text-slate-500 font-bold ml-2">symphony@app-builder:~</span>
             </div>
             
             {/* Status indicator */}
