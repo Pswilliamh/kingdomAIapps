@@ -47,6 +47,7 @@ import { SymphonyEmphasizedLayout } from './components/SymphonyEmphasizedLayout'
 import { MaestroHerculesLayout } from './components/MaestroHerculesLayout';
 import { MaestroDashboard } from './components/MaestroDashboard';
 import { TokenizationLedgerLayout } from './components/TokenizationLedgerLayout';
+import { SplitWorkspace } from './components/SplitWorkspace';
 
 interface GatewayEngine {
   id: string;
@@ -61,18 +62,6 @@ const gatewayMatrix: GatewayEngine[] = [
     title: 'Symphony AI',
     hook: 'The automated high-performance App Generator for creators.',
     symphonyGreeting: 'Hello! I am Symphony AI, your automated, high-performance App Generator for creators. Tell me what type of application you would like to build today, and I will instantly lay out a beautiful, functional blueprint, layout pattern, or component prototype for you on the very first turn!'
-  },
-  {
-    id: 'aegis',
-    title: 'Aegis Core',
-    hook: 'Securing cloud VM isolation layers with enterprise grade cryptographically sealed boundaries.',
-    symphonyGreeting: 'System shield activated. I am Aegis, managing high-security firewalls, localized keystores, and isolated sandbox protocols. I will ensure your digital estate remains safe from external variance.'
-  },
-  {
-    id: 'genesis',
-    title: 'Genesis Engine',
-    hook: 'Live-compiling your ideas directly into high-fidelity webapp-estates instantly.',
-    symphonyGreeting: 'Greetings, Pioneer! I am Genesis. I specialize in rapid construction and code delivery, instantly anchoring your domain and bootstrapping your decentralized partitions. What shall we build first?'
   }
 ];
 
@@ -944,25 +933,7 @@ export default function GeneratedProductCard() {
             className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 space-y-20"
           >
             {(window.location.hostname === "maestroaiapps.com" || window.location.hostname === "www.maestroaiapps.com" || activeLayout === 'maestro') ? (
-              <div className="space-y-6 pt-6">
-                <div className="text-center space-y-4 max-w-3xl mx-auto pb-6">
-                  <h1 style={{
-                    fontSize: '56px',
-                    fontWeight: 700,
-                    letterSpacing: '-1.5px',
-                    marginBottom: '12px',
-                    zIndex: 2,
-                    textAlign: 'center'
-                  }} className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                    What Does Your <span style={{ fontStyle: 'italic', color: '#60a5fa' }}>Soul</span> See?
-                  </h1>
-                  <p className="text-base sm:text-lg text-slate-400 font-normal leading-relaxed text-center max-w-2xl mx-auto">
-                    A clean, high-contrast digital workspace orchestrating real-time real estate overrides with pure autonomy.
-                  </p>
-                </div>
-                
-                <MaestroDashboard initialEstateName={estateName} />
-              </div>
+              <MaestroDashboard initialEstateName={estateName} />
             ) : (
               <>
                 {activeLayout === 'default' && (
@@ -999,6 +970,9 @@ export default function GeneratedProductCard() {
                 </p>
               </div>
             </section>
+
+            {/* SPLIT WORKSPACE: CHAT & LIVE PREVIEW STAGE */}
+            <SplitWorkspace />
 
             {/* SECTION: CREATION HORIZON DATA BANNER & CAROUSEL */}
             <section className="py-12 border-t border-white/5 space-y-12 relative overflow-hidden">
@@ -2722,116 +2696,7 @@ export default function GeneratedProductCard() {
             </div>
 
                         {/* ADMIN TESTING DASHBOARD PANEL - Secured behind private unlisted URL path */}
-            {currentPath === '/03master-06control-09panel' && (
-              <div className="mt-8 bg-slate-900/60 backdrop-blur-xl border border-violet-500/20 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-violet-600/5 blur-3xl rounded-full" />
-                
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-white/5 pb-4 gap-3">
-                  <div className="space-y-1">
-                    <div className="flex items-center space-x-2 text-[10px] text-violet-400 font-bold uppercase tracking-wider font-mono">
-                      <ShieldCheck className="w-4 h-4 text-violet-400 animate-pulse" />
-                      <span>Administrative Authority Controls</span>
-                    </div>
-                    <h3 className="text-lg font-black text-white">Metrics & Verification Panel</h3>
-                  </div>
-                  
-                  <span className="text-[10px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-bold uppercase tracking-widest w-fit flex items-center gap-1.5 h-fit">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Sovereign Security Online</span>
-                  </span>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 bg-slate-950/60 rounded-2xl border border-white/5 flex items-center justify-between">
-                    <div className="space-y-0.5 text-left">
-                      <span className="text-xs text-slate-500 block font-semibold font-sans">Active Sandboxed Containers</span>
-                      <span className="text-xs font-bold text-slate-350 font-mono">Simulated Node VM Instances</span>
-                    </div>
-                    <div className="text-xl font-extrabold text-white font-mono bg-violet-500/15 border border-violet-500/30 px-3 py-1 rounded-xl">
-                      {nodes.length + 7} Containers
-                    </div>
-                  </div>
-
-                  <div className="p-4 bg-slate-950/60 rounded-2xl border border-white/5 flex items-center justify-between">
-                    <div className="space-y-0.5 text-left">
-                      <span className="text-xs text-slate-500 block font-semibold font-sans">Global Energy Escrow Status</span>
-                      <span className="text-xs font-bold text-slate-350 font-mono">Escrow Ledger Health</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl font-mono">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Stable 200 OK</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ADMIN DOMAIN LAYOUT OVERRIDE SELECTOR */}
-                <div className="p-5 bg-slate-950/80 rounded-2xl border-2 border-violet-500/40 space-y-4 text-left shadow-xl shadow-indigo-500/5">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                    <div className="space-y-1">
-                      <span className="text-xs font-bold text-white font-sans flex items-center gap-1.5">
-                        <Sliders className="w-4 h-4 text-indigo-400" />
-                        Global Domain Layout Switcher (Real-time Estate Overrides)
-                      </span>
-                      <p className="text-[11px] text-slate-400 font-sans leading-normal">
-                        Current detected browser hostname: <span className="font-mono text-indigo-400 font-bold bg-indigo-500/10 px-1.5 py-0.5 rounded">{currentHost || 'localhost'}</span> &bull; 
-                        Active Layout: <span className="font-mono text-emerald-400 font-bold uppercase">{activeLayout}</span> {isCleanFlow && <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-mono px-1 py-0.2 rounded ml-1">CLEAN FLOW</span>}
-                      </p>
-                    </div>
-
-                    <div className="w-full sm:w-auto">
-                      <select
-                        value={overrideLayout || 'default'}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          setOverrideLayout(val === 'default' ? null : (val as any));
-                          setIsCleanFlow(val === 'maestro');
-                        }}
-                        className="w-full sm:w-80 bg-slate-900 border-2 border-amber-400 text-amber-300 font-mono rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-amber-300 focus:ring-2 focus:ring-amber-500/40 cursor-pointer shadow-lg shadow-amber-500/10 transition-all hover:bg-slate-950 font-bold"
-                      >
-                        <option value="default">kingdomaiapps.com (Cinematic Layout)</option>
-                        <option value="maestro">maestroaiapps.com (Hercules Clean Layout)</option>
-                        <option value="symphony">symphoniaiapps.com (Voice Assistant Layout)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <p className="text-xs text-slate-500 font-normal leading-relaxed max-w-md text-left">
-                    This panel is rendered for administrative validation of digital app isolation properties, sandbox metrics, and mock database integration state.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      // Flush custom states back to default values
-                      setDomain('');
-                      setSearchResult(null);
-                      setSelectedTopUp(0);
-                      setHasPaidFee(false);
-                      setEstateName('My First Kingdom');
-                      setInitialNodeName('Aegis-I');
-                      setUserEmail('');
-                      setNodes([
-                        {
-                          id: 'node-1',
-                          name: 'Aegis-I',
-                          model: 'Sovereign Llama 3',
-                          status: 'active',
-                          creditsConsumed: 240,
-                          created: '2026-05-26 11:30'
-                        }
-                      ]);
-                      setCheckoutStep(0);
-                      setFirestoreWriteStatus('');
-                      alert('Draft real-estate collections flushed successfully. All developer configurations have been returned to seed states.');
-                    }}
-                    className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 rounded-xl shadow-lg shadow-red-500/10 transition-all cursor-pointer text-center font-sans tracking-wider uppercase"
-                  >
-                    Flush Test Real Estate Collections
-                  </button>
-                </div>
-              </div>
-            )}
           </motion.div>
         )}
 
@@ -3441,36 +3306,7 @@ export default function GeneratedProductCard() {
                 </button>
               </div>
 
-              {/* Core Engine Switcher */}
-              <div className="bg-slate-900/60 border-b border-white/5 px-4 py-2 flex items-center justify-between gap-1 text-[11px] font-sans">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">Core Engine:</span>
-                <div className="flex gap-1.5">
-                  {gatewayMatrix.map((eng) => (
-                    <button
-                      key={eng.id}
-                      type="button"
-                      onClick={() => {
-                        setSelectedEngineId(eng.id);
-                        setSymphonyMessages(prev => [
-                          ...prev,
-                          {
-                            sender: 'symphony',
-                            text: `[RE-ROUTE ACTIVE]: Switched core routing orchestrator to the ${eng.title}. ${eng.symphonyGreeting}`,
-                            timestamp: new Date()
-                          }
-                        ]);
-                      }}
-                      className={`px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest rounded transition-all cursor-pointer ${
-                        selectedEngineId === eng.id
-                          ? 'bg-violet-600 text-white shadow-sm font-semibold'
-                          : 'bg-white/5 text-slate-500 hover:text-white'
-                      }`}
-                    >
-                      {eng.title.split(' ')[0]}
-                    </button>
-                  ))}
-                </div>
-              </div>
+
 
               {/* Messages Body */}
               <div className="flex-1 overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-white/10 text-left">
