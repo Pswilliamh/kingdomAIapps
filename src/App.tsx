@@ -45,6 +45,7 @@ import {
 import { MatrixTerminalGlitchText } from './components/MatrixTerminalGlitchText';
 import { SymphonyEmphasizedLayout } from './components/SymphonyEmphasizedLayout';
 import { MaestroHerculesLayout } from './components/MaestroHerculesLayout';
+import { MaestroDashboard } from './components/MaestroDashboard';
 import { TokenizationLedgerLayout } from './components/TokenizationLedgerLayout';
 
 interface GatewayEngine {
@@ -701,13 +702,15 @@ export default function App() {
             ) : null}
 
             {view === 'landing' ? (
-              <button
-                onClick={() => setView('dashboard')}
-                className="px-4.5 py-2 text-xs font-semibold text-white tracking-wide uppercase border border-violet-500/40 hover:border-violet-450 rounded-xl transition-all duration-200 bg-gradient-to-r from-violet-600/80 to-indigo-600/80 hover:from-violet-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 flex items-center space-x-2 shadow-lg shadow-violet-500/10 cursor-pointer"
-              >
-                <LayoutDashboard className="w-4 h-4 text-violet-200 animate-pulse" />
-                <span>Sovereign Hub</span>
-              </button>
+              window.location.pathname === "/03master-06control-09panel" && (
+                <button
+                  onClick={() => setView('dashboard')}
+                  className="px-4.5 py-2 text-xs font-semibold text-white tracking-wide uppercase border border-violet-500/40 hover:border-violet-450 rounded-xl transition-all duration-200 bg-gradient-to-r from-violet-600/80 to-indigo-600/80 hover:from-violet-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 flex items-center space-x-2 shadow-lg shadow-violet-500/10 cursor-pointer"
+                >
+                  <LayoutDashboard className="w-4 h-4 text-violet-200 animate-pulse" />
+                  <span>Sovereign Hub</span>
+                </button>
+              )
             ) : (
               <button
                 onClick={() => {
@@ -1852,7 +1855,7 @@ export default function App() {
             )}
 
             {activeLayout === 'maestro' && (
-              <MaestroHerculesLayout 
+              <MaestroDashboard 
                 initialEstateName={estateName} 
               />
             )}
