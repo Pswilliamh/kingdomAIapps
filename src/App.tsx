@@ -740,7 +740,29 @@ export default function App() {
             transition={{ duration: 0.3 }}
             className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 space-y-20"
           >
-            {activeLayout === 'default' && (
+            {(window.location.hostname === "maestroaiapps.com" || window.location.hostname === "www.maestroaiapps.com" || activeLayout === 'maestro') ? (
+              <div className="space-y-6 pt-6">
+                <div className="text-center space-y-4 max-w-3xl mx-auto pb-6">
+                  <h1 style={{
+                    fontSize: '56px',
+                    fontWeight: 700,
+                    letterSpacing: '-1.5px',
+                    marginBottom: '12px',
+                    zIndex: 2,
+                    textAlign: 'center'
+                  }} className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    What Does Your <span style={{ fontStyle: 'italic', color: '#60a5fa' }}>Soul</span> See?
+                  </h1>
+                  <p className="text-base sm:text-lg text-slate-400 font-normal leading-relaxed text-center max-w-2xl mx-auto">
+                    A clean, high-contrast digital workspace orchestrating real-time real estate overrides with pure autonomy.
+                  </p>
+                </div>
+                
+                <MaestroDashboard initialEstateName={estateName} />
+              </div>
+            ) : (
+              <>
+                {activeLayout === 'default' && (
               <>
                 {/* HERO SECTION */}
             <section className="text-center max-w-3xl mx-auto space-y-8 pt-6">
@@ -2076,6 +2098,8 @@ export default function App() {
                 })}
               </div>
             </section>
+              </>
+            )}
           </motion.main>
         )}
 
